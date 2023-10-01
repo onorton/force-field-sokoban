@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://ddle7o3ae3u4f"]
 
 [ext_resource type="Script" path="res://Scripts/TurnManager.cs" id="1_8hm2m"]
 [ext_resource type="TileSet" uid="uid://c03p7wu6xn04h" path="res://tileset.tres" id="2_v4ytd"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="6_4ks6k"]
 [ext_resource type="Texture2D" uid="uid://wq2aftb4cfvh" path="res://Sprites/force_field.png" id="7_qxowp"]
 [ext_resource type="Script" path="res://Scripts/ForceField.cs" id="8_fm0jx"]
-[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="9_u8x88"]
+[ext_resource type="PackedScene" uid="uid://cw13eutkavpvg" path="res://Scenes/ui.tscn" id="9_u8x88"]
 
 [node name="Root" type="Node2D"]
 
@@ -24,7 +24,7 @@ tile_set = ExtResource("2_v4ytd")
 format = 2
 layer_0/name = "Background"
 layer_0/z_index = -2
-layer_0/tile_data = PackedInt32Array(-131075, 2, 0, -131074, 2, 0, -65538, 2, 0, -1, 2, 0, 65535, 2, 0, 0, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 2, 2, 0, -65534, 2, 0, -131071, 2, 0, -196607, 2, 0, -196608, 2, 0, -131073, 2, 0, -196606, 2, 0, -131070, 2, 0, -131069, 2, 0, -65533, 2, 0, 3, 2, 0, 65539, 2, 0, 131075, 2, 0, 131074, 2, 0, 131073, 2, 0, 131072, 2, 0, 196607, 2, 0, 196606, 2, 0, 131070, 2, 0, 131069, 2, 0, 65533, 2, 0, -3, 2, 0, -65539, 2, 0, 196605, 2, 0, -2, 2, 0, 65534, 2, 0, -131072, 2, 0, -65537, 2, 0, -65536, 2, 0, -65535, 2, 0, 1, 2, 0, 131071, 2, 0)
+layer_0/tile_data = PackedInt32Array(-131075, 2, 0, -131074, 2, 0, -65538, 2, 0, -1, 2, 0, 65535, 2, 0, 0, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 2, 2, 0, -65534, 2, 0, -131071, 65538, 0, -196607, 2, 0, -196608, 2, 0, -131073, 2, 0, -196606, 2, 0, -131070, 2, 0, -131069, 2, 0, -65533, 2, 0, 3, 2, 0, 65539, 2, 0, 131075, 2, 0, 131074, 2, 0, 131073, 2, 0, 131072, 2, 0, 196607, 2, 0, 196606, 2, 0, 131070, 2, 0, 131069, 2, 0, 65533, 2, 0, -3, 2, 0, -65539, 2, 0, 196605, 2, 0, -2, 65538, 0, 65534, 2, 0, -131072, 2, 0, -65537, 2, 1, -65536, 2, 0, -65535, 2, 0, 1, 2, 1, 131071, 2, 0)
 layer_1/name = "Impassable"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="6_qg4e0"]
 [ext_resource type="Texture2D" uid="uid://wq2aftb4cfvh" path="res://Sprites/force_field.png" id="7_nwwcf"]
 [ext_resource type="Script" path="res://Scripts/ForceField.cs" id="8_wnkwp"]
-[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="9_eirad"]
+[ext_resource type="PackedScene" uid="uid://cw13eutkavpvg" path="res://Scenes/ui.tscn" id="9_eirad"]
 
 [node name="Root" type="Node2D"]
 
@@ -25,7 +25,7 @@ tile_set = ExtResource("2_a5iex")
 format = 2
 layer_0/name = "Background"
 layer_0/z_index = -2
-layer_0/tile_data = PackedInt32Array(-2, 2, 0, -1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, 65534, 2, 0, 131070, 2, 0, 65536, 2, 0, 131071, 2, 0, 65537, 2, 0, 65538, 2, 0, 0, 2, 0, -65539, 2, 0, -65538, 2, 0, -65537, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 2, 0, -131069, 2, 0)
+layer_0/tile_data = PackedInt32Array(-2, 2, 0, -1, 2, 1, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, 65534, 2, 0, 131070, 2, 0, 65536, 65538, 0, 131071, 2, 0, 65537, 2, 0, 65538, 65538, 1, 0, 2, 0, -65539, 2, 0, -65538, 2, 0, -65537, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 2, 0, -131069, 2, 0)
 layer_1/name = "Impassable"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
