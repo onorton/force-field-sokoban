@@ -21,6 +21,7 @@ public partial class TurnManager : Node
 	private AudioStream _pushedBoxSound;
 	private AudioStream _pushedBoxIntoGoalSound;
 	private AudioStream _undoSound;
+	private IDictionary<AudioStream, int> _soundPriorities;
 
 
 	private Node2D _player;
@@ -81,6 +82,16 @@ public partial class TurnManager : Node
 		_pushedBoxIntoGoalSound = GD.Load<AudioStream>("res://Audio/pushed_box_to_goal.wav");
 		_undoSound = GD.Load<AudioStream>("res://Audio/undo.wav");
 
+		_soundPriorities = new Dictionary<AudioStream, int>()
+		{
+			[_victorySound] = 0,
+			[_gameOverSound] = 0,
+			[_undoSound] = 0,
+			[_pushedBoxIntoGoalSound] = 1,
+			[_forceFieldSound] = 2,
+			[_pushedBoxSound] = 3,
+		};
+
 		_currentTurn = 0;
 
 
@@ -97,7 +108,8 @@ public partial class TurnManager : Node
 		{
 			EmitSignal(SignalName.LevelComplete);
 			_gameOver = true;
-			PlaySound(_victorySound);
+			_soundEffectPlayer.Stream = _victorySound;
+			_soundEffectPlayer.Play();
 
 		}
 	}
@@ -114,6 +126,7 @@ public partial class TurnManager : Node
 
 		ForceFieldTurnsLeftUpdate();
 
+		var queuedSounds = new List<AudioStream>();
 
 		SaveCurrentState();
 
@@ -149,7 +162,7 @@ public partial class TurnManager : Node
 			}
 			else
 			{
-				PlaySound(_pushedBoxSound);
+				queuedSounds.Add(_pushedBoxSound);
 			}
 			cargoAtNewPosition.Position = _tileMap.MapToLocal(newCargoPosition);
 
@@ -161,14 +174,14 @@ public partial class TurnManager : Node
 
 				_activeCargo.Remove(cargoAtNewPosition);
 				cargoAtNewPosition.QueueFree();
-				PlaySound(_pushedBoxIntoGoalSound);
+				queuedSounds.Add(_pushedBoxIntoGoalSound);
 			}
 		}
 
 
 		if (_currentTurn % _turnsUntilForcefieldExtends == 0)
 		{
-			PlaySound(_forceFieldSound);
+			queuedSounds.Add(_forceFieldSound);
 			// force fields now extend and potentially push player
 			foreach (var forceField in _forceFields)
 			{
@@ -182,7 +195,6 @@ public partial class TurnManager : Node
 				{
 					forceFieldDirection = Vector2I.Down;
 				}
-
 
 				while (forceField.HasPoint(_tileMap.MapToLocal(newPlayerPosition)))
 				{
@@ -219,9 +231,11 @@ public partial class TurnManager : Node
 
 								_activeCargo.Remove(cargoAtForcedNewPosition);
 								cargoAtForcedNewPosition.QueueFree();
+								queuedSounds.Add(_pushedBoxIntoGoalSound);
 							}
 							else
 							{
+								queuedSounds.Add(_pushedBoxSound);
 								cargoAtForcedNewPosition.Position = _tileMap.MapToLocal(newCargoPosition);
 							}
 						}
@@ -237,9 +251,11 @@ public partial class TurnManager : Node
 		if (_forceFields.Any(f => f.HasPoint(_player.Position)) || _activeCargo.Any(c => _forceFields.Any(f => f.HasPoint(c.Position))) || _forceFields.Any(f => f.HasPoint(_exit.Position)))
 		{
 			_gameOver = true;
-			PlaySound(_gameOverSound);
+			queuedSounds.Add(_gameOverSound);
 			EmitSignal(SignalName.GameOver);
 		}
+
+		PlayHighestPrioritySound(queuedSounds);
 
 	}
 
@@ -252,10 +268,18 @@ public partial class TurnManager : Node
 		_previousStates.Add(currentState);
 	}
 
+	private void PlayHighestPrioritySound(List<AudioStream> queuedSounds)
+	{
+		if (queuedSounds.Any())
+		{
+			_soundEffectPlayer.Stream = queuedSounds.Select(s => (sound: s, priority: _soundPriorities[s])).OrderBy(x => x.priority).Select(x => x.sound).First();
+			_soundEffectPlayer.Play();
+		}
+	}
+
 	private void PlaySound(AudioStream sound)
 	{
-		_soundEffectPlayer.Stream = sound;
-		_soundEffectPlayer.Play();
+		PlayHighestPrioritySound(new List<AudioStream>() { sound });
 	}
 
 
@@ -317,6 +341,4 @@ public partial class TurnManager : Node
 	{
 		EmitSignal(SignalName.ForceFieldTurnsLeftChanged, _turnsUntilForcefieldExtends - (_currentTurn % _turnsUntilForcefieldExtends));
 	}
-
-	// TODO, Polish: Priority order of sounds if multiple played per turn
 }
