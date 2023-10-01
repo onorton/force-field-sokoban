@@ -8,6 +8,13 @@ public partial class PlayerVariables : Node
 
 	private int _numberOfLevels { get; } = 7;
 
+	public int TotalTurns { get; private set; } = 0;
+
+
+	public void UpdateTotalTurns(int turnsForLevel)
+	{
+		TotalTurns += turnsForLevel;
+	}
 
 	public void NextLevel()
 	{

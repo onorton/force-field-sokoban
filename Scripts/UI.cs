@@ -67,14 +67,17 @@ public partial class UI : CanvasLayer
 		_gameOver.Visible = true;
 	}
 
-	public void OnLevelComplete()
+	public void OnLevelComplete(int turnsToComplete)
 	{
 		if (_playerVariables.AtLastLevel())
 		{
 			_victory.Visible = true;
+			_victory.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/CenterContainer4/Turns").Text = $"Turns: {turnsToComplete}";
+			_victory.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/CenterContainer3/Total Turns").Text = $"Total Turns: {_playerVariables.TotalTurns}";
 		}
 		else
 		{
+			_levelComplete.GetNode<RichTextLabel>("MarginContainer/VBoxContainer/CenterContainer/Turns").Text = $"Turns: {turnsToComplete}";
 			_levelComplete.Visible = true;
 		}
 	}

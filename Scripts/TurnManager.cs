@@ -9,7 +9,7 @@ public partial class TurnManager : Node
 	public delegate void GameOverEventHandler();
 
 	[Signal]
-	public delegate void LevelCompleteEventHandler();
+	public delegate void LevelCompleteEventHandler(int turnsToComplete);
 
 	[Signal]
 	public delegate void ForceFieldTurnsLeftChangedEventHandler(int turnsLeft);
@@ -106,10 +106,11 @@ public partial class TurnManager : Node
 	{
 		if (_player.Position == _exit.Position && !_activeCargo.Any() && !_gameOver)
 		{
-			EmitSignal(SignalName.LevelComplete);
+			EmitSignal(SignalName.LevelComplete, _currentTurn);
 			_gameOver = true;
 			_soundEffectPlayer.Stream = _victorySound;
 			_soundEffectPlayer.Play();
+			_playerVariables.UpdateTotalTurns(_currentTurn);
 
 		}
 	}
@@ -341,4 +342,5 @@ public partial class TurnManager : Node
 	{
 		EmitSignal(SignalName.ForceFieldTurnsLeftChanged, _turnsUntilForcefieldExtends - (_currentTurn % _turnsUntilForcefieldExtends));
 	}
+
 }

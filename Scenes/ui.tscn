@@ -85,6 +85,16 @@ text = "Level Complete!
 fit_content = true
 autowrap_mode = 0
 
+[node name="CenterContainer" type="CenterContainer" parent="Menus/Level Complete/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Turns" type="RichTextLabel" parent="Menus/Level Complete/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "Turns: 100"
+fit_content = true
+autowrap_mode = 0
+
 [node name="Continue" type="Button" parent="Menus/Level Complete/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -99,6 +109,7 @@ size_flags_horizontal = 4
 text = "Quit"
 
 [node name="Paused" type="PanelContainer" parent="Menus"]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -168,6 +179,30 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "Victory!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CenterContainer4" type="CenterContainer" parent="Menus/Victory/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Turns" type="RichTextLabel" parent="Menus/Victory/MarginContainer/VBoxContainer/CenterContainer4"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Turns: 0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CenterContainer3" type="CenterContainer" parent="Menus/Victory/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Total Turns" type="RichTextLabel" parent="Menus/Victory/MarginContainer/VBoxContainer/CenterContainer3"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Total Turns: 0"
 fit_content = true
 autowrap_mode = 0
 
