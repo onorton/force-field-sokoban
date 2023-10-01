@@ -1,0 +1,224 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI.cs" id="1_ijc1p"]
+[ext_resource type="StyleBox" uid="uid://c2xivtvyob0sh" path="res://styleboxflat.tres" id="2_3fywx"]
+[ext_resource type="Texture2D" uid="uid://c00yvy1nk8m0h" path="res://Sprites/undo.png" id="2_tevap"]
+[ext_resource type="Script" path="res://Scripts/MuteButton.cs" id="3_p4ixv"]
+[ext_resource type="Texture2D" uid="uid://sxh1q1f5bbnb" path="res://Sprites/muted.png" id="3_qa0ts"]
+[ext_resource type="Texture2D" uid="uid://dxhu7eqd3snqy" path="res://Sprites/unmuted.png" id="3_y2542"]
+[ext_resource type="Texture2D" uid="uid://dsve5w8v0txd0" path="res://Sprites/hourglass.png" id="6_bw27v"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ijc1p")
+
+[node name="Menus" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.151855
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game Over" type="PanelContainer" parent="Menus"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_3fywx")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/Game Over"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Game Over/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="RichTextLabel" parent="Menus/Game Over/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Game Over!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Try Again" type="Button" parent="Menus/Game Over/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Try Again
+"
+
+[node name="Quit" type="Button" parent="Menus/Game Over/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
+[node name="Level Complete" type="PanelContainer" parent="Menus"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_3fywx")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/Level Complete"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Level Complete/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="RichTextLabel" parent="Menus/Level Complete/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Level Complete!
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Continue" type="Button" parent="Menus/Level Complete/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Continue
+"
+
+[node name="Quit" type="Button" parent="Menus/Level Complete/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
+[node name="Paused" type="PanelContainer" parent="Menus"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_3fywx")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/Paused"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Paused/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="Menus/Paused/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="Menus/Paused/MarginContainer/VBoxContainer/CenterContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Paused"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Restart" type="Button" parent="Menus/Paused/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Restart
+"
+
+[node name="Quit" type="Button" parent="Menus/Paused/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
+[node name="Buttons" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons"]
+layout_mode = 2
+
+[node name="Undo" type="TextureButton" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_tevap")
+
+[node name="Mute" type="Control" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_p4ixv")
+
+[node name="Unmuted" type="TextureButton" parent="Buttons/HBoxContainer/Mute"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("3_y2542")
+
+[node name="Muted" type="TextureButton" parent="Buttons/HBoxContainer/Mute"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("3_qa0ts")
+
+[node name="Force Field Status" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Force Field Status"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="Force Field Status/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Force Field Movement:
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Force Field Status/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Turns" type="RichTextLabel" parent="Force Field Status/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "5
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Hourglass" type="TextureRect" parent="Force Field Status/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_bw27v")
+expand_mode = 2
+
+[connection signal="pressed" from="Menus/Game Over/MarginContainer/VBoxContainer/Try Again" to="." method="OnTryAgain"]
+[connection signal="pressed" from="Menus/Game Over/MarginContainer/VBoxContainer/Quit" to="." method="OnQuit"]
+[connection signal="pressed" from="Menus/Level Complete/MarginContainer/VBoxContainer/Continue" to="." method="OnContinue"]
+[connection signal="pressed" from="Menus/Level Complete/MarginContainer/VBoxContainer/Quit" to="." method="OnQuit"]
+[connection signal="pressed" from="Menus/Paused/MarginContainer/VBoxContainer/Restart" to="." method="OnTryAgain"]
+[connection signal="pressed" from="Menus/Paused/MarginContainer/VBoxContainer/Quit" to="." method="OnQuit"]
+[connection signal="pressed" from="Buttons/HBoxContainer/Undo" to="." method="OnUndo"]
+[connection signal="MuteToggle" from="Buttons/HBoxContainer/Mute" to="." method="UpdateMute"]
+[connection signal="pressed" from="Buttons/HBoxContainer/Mute/Unmuted" to="Buttons/HBoxContainer/Mute" method="OnStateChanged" binds= [true]]
+[connection signal="pressed" from="Buttons/HBoxContainer/Mute/Muted" to="Buttons/HBoxContainer/Mute" method="OnStateChanged" binds= [false]]

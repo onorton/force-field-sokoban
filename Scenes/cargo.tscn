@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsrsqqnnn1q1n"]
+
+[ext_resource type="Texture2D" uid="uid://db7ocw5gea6xj" path="res://Sprites/cargo.png" id="1_laa3e"]
+
+[node name="Cargo" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_laa3e")

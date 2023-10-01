@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://Scripts/TurnManager.cs" id="1_t4kue"]
+[ext_resource type="TileSet" uid="uid://c03p7wu6xn04h" path="res://tileset.tres" id="2_3f3mu"]
+[ext_resource type="PackedScene" uid="uid://dsrsqqnnn1q1n" path="res://Scenes/cargo.tscn" id="3_2v6vs"]
+[ext_resource type="Texture2D" uid="uid://4uf8ktcfuwue" path="res://Sprites/exit.png" id="4_e8ywf"]
+[ext_resource type="Texture2D" uid="uid://cgcimmormiyrv" path="res://Sprites/player.png" id="5_uwhka"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="6_ccihd"]
+[ext_resource type="Texture2D" uid="uid://wq2aftb4cfvh" path="res://Sprites/force_field.png" id="7_sympn"]
+[ext_resource type="Script" path="res://Scripts/ForceField.cs" id="8_qwhpb"]
+[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="9_mwxyy"]
+
+[node name="Root" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Turn Manager" type="Node" parent="."]
+script = ExtResource("1_t4kue")
+
+[node name="TileMap" type="TileMap" parent="Turn Manager"]
+texture_filter = 1
+tile_set = ExtResource("2_3f3mu")
+format = 2
+layer_0/name = "Background"
+layer_0/z_index = -2
+layer_0/tile_data = PackedInt32Array(-65541, 2, 0, -5, 2, 0, 65531, 2, 0, 131067, 2, 0, 196603, 2, 0, 196604, 2, 0, 196605, 2, 0, 196606, 2, 0, 196607, 2, 0, 131072, 2, 0, 131073, 2, 0, 65537, 2, 0, 65538, 2, 0, 2, 2, 0, -65534, 2, 0, -131070, 2, 0, 131074, 2, 0, 65536, 2, 0, 131071, 2, 0, 131070, 2, 0, 131069, 2, 0, 131068, 2, 0, 65532, 2, 0, -4, 2, 0, -3, 2, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, -65535, 2, 0, -65536, 2, 0, -1, 2, 0, -2, 2, 0, -65539, 2, 0, -65540, 2, 0, -131076, 2, 0, -131077, 2, 0, -131075, 2, 0, -131074, 2, 0, -131073, 2, 0, -196608, 2, 0, -131072, 2, 0, -131071, 2, 0, -65537, 2, 0, -65538, 2, 0, -196607, 2, 0)
+layer_1/name = "Impassable"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array(-131071, 262145, 2, -131070, 327681, 1, -196607, 327681, 1, -65534, 393217, 1, 2, 393217, 1, 65538, 393217, 1, 131074, 327681, 2, 131073, 262145, 0, 131072, 262145, 0, 196607, 65537, 3, 131071, 393217, 0, 196606, 262145, 0, 196605, 262145, 0, 196604, 262145, 0, -3, 196609, 2, -131077, 262145, 1, -131076, 262145, 0, -131075, 262145, 0, -131074, 262145, 0, -131073, 262145, 0, -196608, 262145, 0, -65541, 393217, 1, -5, 393217, 1, 65531, 393217, 1, 131067, 393217, 1, 196603, 262145, 2, -1, 196609, 2)
+layer_2/name = "Goal"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array(65535, 4, 0, 65537, 4, 0, 65532, 4, 0)
+
+[node name="Active Cargo" type="Node" parent="Turn Manager"]
+
+[node name="Cargo" parent="Turn Manager/Active Cargo" instance=ExtResource("3_2v6vs")]
+position = Vector2(16, -16)
+
+[node name="Cargo2" parent="Turn Manager/Active Cargo" instance=ExtResource("3_2v6vs")]
+position = Vector2(16, 16)
+
+[node name="Cargo3" parent="Turn Manager/Active Cargo" instance=ExtResource("3_2v6vs")]
+position = Vector2(-48, 16)
+
+[node name="Exit" type="Sprite2D" parent="Turn Manager"]
+z_index = -1
+texture_filter = 1
+position = Vector2(-112, -48)
+texture = ExtResource("4_e8ywf")
+
+[node name="Player" type="Sprite2D" parent="Turn Manager"]
+texture_filter = 1
+position = Vector2(-112, -16)
+texture = ExtResource("5_uwhka")
+script = ExtResource("6_ccihd")
+
+[node name="Forcefield Bottom" type="NinePatchRect" parent="Turn Manager"]
+offset_left = -640.0
+offset_top = 224.0
+offset_right = 640.0
+offset_bottom = 800.0
+texture = ExtResource("7_sympn")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+script = ExtResource("8_qwhpb")
+ExtendsUpwards = true
+
+[node name="Forcefield Top" type="NinePatchRect" parent="Turn Manager"]
+offset_left = -640.0
+offset_top = -800.0
+offset_right = 640.0
+offset_bottom = -224.0
+texture = ExtResource("7_sympn")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+script = ExtResource("8_qwhpb")
+
+[node name="Sound Effect Player" type="AudioStreamPlayer2D" parent="Turn Manager"]
+
+[node name="UI" parent="." instance=ExtResource("9_mwxyy")]
+
+[connection signal="ForceFieldTurnsLeftChanged" from="Turn Manager" to="UI" method="OnTurnsUntilForceFieldUpdate"]
+[connection signal="GameOver" from="Turn Manager" to="UI" method="OnGameOver"]
+[connection signal="LevelComplete" from="Turn Manager" to="UI" method="OnLevelComplete"]
+[connection signal="PlayerAttemptMove" from="Turn Manager/Player" to="Turn Manager" method="OnPlayerAttemptMove"]
+[connection signal="Undo" from="UI" to="Turn Manager" method="OnUndo"]

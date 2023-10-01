@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://Scripts/TurnManager.cs" id="1_8hm2m"]
+[ext_resource type="TileSet" uid="uid://c03p7wu6xn04h" path="res://tileset.tres" id="2_v4ytd"]
+[ext_resource type="PackedScene" uid="uid://dsrsqqnnn1q1n" path="res://Scenes/cargo.tscn" id="3_m8tw1"]
+[ext_resource type="Texture2D" uid="uid://4uf8ktcfuwue" path="res://Sprites/exit.png" id="4_6dien"]
+[ext_resource type="Texture2D" uid="uid://cgcimmormiyrv" path="res://Sprites/player.png" id="5_7dfci"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="6_4ks6k"]
+[ext_resource type="Texture2D" uid="uid://wq2aftb4cfvh" path="res://Sprites/force_field.png" id="7_qxowp"]
+[ext_resource type="Script" path="res://Scripts/ForceField.cs" id="8_fm0jx"]
+[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="9_u8x88"]
+
+[node name="Root" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Turn Manager" type="Node" parent="."]
+script = ExtResource("1_8hm2m")
+
+[node name="TileMap" type="TileMap" parent="Turn Manager"]
+texture_filter = 1
+tile_set = ExtResource("2_v4ytd")
+format = 2
+layer_0/name = "Background"
+layer_0/z_index = -2
+layer_0/tile_data = PackedInt32Array(-131075, 2, 0, -131074, 2, 0, -65538, 2, 0, -1, 2, 0, 65535, 2, 0, 0, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 2, 2, 0, -65534, 2, 0, -131071, 2, 0, -196607, 2, 0, -196608, 2, 0, -131073, 2, 0, -196606, 2, 0, -131070, 2, 0, -131069, 2, 0, -65533, 2, 0, 3, 2, 0, 65539, 2, 0, 131075, 2, 0, 131074, 2, 0, 131073, 2, 0, 131072, 2, 0, 196607, 2, 0, 196606, 2, 0, 131070, 2, 0, 131069, 2, 0, 65533, 2, 0, -3, 2, 0, -65539, 2, 0, 196605, 2, 0, -2, 2, 0, 65534, 2, 0, -131072, 2, 0, -65537, 2, 0, -65536, 2, 0, -65535, 2, 0, 1, 2, 0, 131071, 2, 0)
+layer_1/name = "Impassable"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array(196605, 1, 2, 131069, 393217, 1, 65533, 393217, 1, -3, 393217, 1, -65539, 393217, 1, -131075, 1, 0, -131074, 65537, 0, -131073, 262145, 0, -196608, 262145, 0, 131074, 262145, 0, 131073, 262145, 0, 131072, 262145, 0, 196607, 262145, 0, 196606, 65537, 2, -131069, 327681, 1, -65533, 393217, 1, 3, 393217, 1, 65539, 393217, 1, 131075, 327681, 2, -196607, 262145, 0, -196606, 327681, 1, -131070, 262145, 2, 65535, 196609, 2)
+layer_2/name = "Goal"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array(0, 4, 0, 2, 4, 0)
+
+[node name="Active Cargo" type="Node" parent="Turn Manager"]
+
+[node name="Cargo" parent="Turn Manager/Active Cargo" instance=ExtResource("3_m8tw1")]
+position = Vector2(16, -16)
+
+[node name="Cargo2" parent="Turn Manager/Active Cargo" instance=ExtResource("3_m8tw1")]
+position = Vector2(-16, -16)
+
+[node name="Exit" type="Sprite2D" parent="Turn Manager"]
+z_index = -1
+texture_filter = 1
+position = Vector2(-48, 48)
+texture = ExtResource("4_6dien")
+
+[node name="Player" type="Sprite2D" parent="Turn Manager"]
+texture_filter = 1
+position = Vector2(-48, -48)
+texture = ExtResource("5_7dfci")
+script = ExtResource("6_4ks6k")
+
+[node name="Forcefield Bottom" type="NinePatchRect" parent="Turn Manager"]
+offset_left = -640.0
+offset_top = 160.0
+offset_right = 640.0
+offset_bottom = 736.0
+texture = ExtResource("7_qxowp")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+script = ExtResource("8_fm0jx")
+ExtendsUpwards = true
+
+[node name="Forcefield Top" type="NinePatchRect" parent="Turn Manager"]
+offset_left = -640.0
+offset_top = -736.0
+offset_right = 640.0
+offset_bottom = -160.0
+texture = ExtResource("7_qxowp")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+script = ExtResource("8_fm0jx")
+
+[node name="Sound Effect Player" type="AudioStreamPlayer2D" parent="Turn Manager"]
+
+[node name="UI" parent="." instance=ExtResource("9_u8x88")]
+
+[connection signal="ForceFieldTurnsLeftChanged" from="Turn Manager" to="UI" method="OnTurnsUntilForceFieldUpdate"]
+[connection signal="GameOver" from="Turn Manager" to="UI" method="OnGameOver"]
+[connection signal="LevelComplete" from="Turn Manager" to="UI" method="OnLevelComplete"]
+[connection signal="PlayerAttemptMove" from="Turn Manager/Player" to="Turn Manager" method="OnPlayerAttemptMove"]
+[connection signal="Undo" from="UI" to="Turn Manager" method="OnUndo"]
