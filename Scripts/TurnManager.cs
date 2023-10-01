@@ -20,6 +20,7 @@ public partial class TurnManager : Node
 	private AudioStream _forceFieldSound;
 	private AudioStream _pushedBoxSound;
 	private AudioStream _pushedBoxIntoGoalSound;
+	private AudioStream _undoSound;
 
 
 	private Node2D _player;
@@ -71,8 +72,6 @@ public partial class TurnManager : Node
 		_playerVariables = GetNode<PlayerVariables>("/root/PlayerVariables");
 		_playerVariables.Paused = false;
 
-
-
 		_soundEffectPlayer = GetNode<AudioStreamPlayer2D>("Sound Effect Player");
 
 		_victorySound = GD.Load<AudioStream>("res://Audio/victory.wav");
@@ -80,6 +79,7 @@ public partial class TurnManager : Node
 		_forceFieldSound = GD.Load<AudioStream>("res://Audio/forcefield.wav");
 		_pushedBoxSound = GD.Load<AudioStream>("res://Audio/pushed_box.wav");
 		_pushedBoxIntoGoalSound = GD.Load<AudioStream>("res://Audio/pushed_box_to_goal.wav");
+		_undoSound = GD.Load<AudioStream>("res://Audio/undo.wav");
 
 		_currentTurn = 0;
 
@@ -261,6 +261,10 @@ public partial class TurnManager : Node
 
 	public void OnUndo()
 	{
+		if (_gameOver)
+		{
+			return;
+		}
 
 		if (!_previousStates.Any())
 		{
@@ -268,6 +272,7 @@ public partial class TurnManager : Node
 			return;
 		}
 
+		PlaySound(_undoSound);
 
 		var previousState = _previousStates.Last();
 		// This works as it's just a stack
@@ -313,11 +318,5 @@ public partial class TurnManager : Node
 		EmitSignal(SignalName.ForceFieldTurnsLeftChanged, _turnsUntilForcefieldExtends - (_currentTurn % _turnsUntilForcefieldExtends));
 	}
 
-	// TODO: UI
-
-
 	// TODO, Polish: Priority order of sounds if multiple played per turn
-
-	// TODO, Polish: Undo sound effect (ticking backwards)
-	// TODO, Polish: Multiple random floor tiles
 }
