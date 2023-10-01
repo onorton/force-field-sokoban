@@ -1,15 +1,15 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://cw13eutkavpvg"]
 
-[ext_resource type="Script" path="res://Scripts/UI.cs" id="1_ijc1p"]
-[ext_resource type="StyleBox" uid="uid://c2xivtvyob0sh" path="res://styleboxflat.tres" id="2_3fywx"]
-[ext_resource type="Texture2D" uid="uid://c00yvy1nk8m0h" path="res://Sprites/undo.png" id="2_tevap"]
-[ext_resource type="Script" path="res://Scripts/MuteButton.cs" id="3_p4ixv"]
-[ext_resource type="Texture2D" uid="uid://sxh1q1f5bbnb" path="res://Sprites/muted.png" id="3_qa0ts"]
-[ext_resource type="Texture2D" uid="uid://dxhu7eqd3snqy" path="res://Sprites/unmuted.png" id="3_y2542"]
-[ext_resource type="Texture2D" uid="uid://dsve5w8v0txd0" path="res://Sprites/hourglass.png" id="6_bw27v"]
+[ext_resource type="Script" path="res://Scripts/UI.cs" id="1_vkwvh"]
+[ext_resource type="StyleBox" uid="uid://c2xivtvyob0sh" path="res://styleboxflat.tres" id="2_llyn7"]
+[ext_resource type="Texture2D" uid="uid://c00yvy1nk8m0h" path="res://Sprites/undo.png" id="3_rk0wu"]
+[ext_resource type="Script" path="res://Scripts/MuteButton.cs" id="4_ielr0"]
+[ext_resource type="Texture2D" uid="uid://dxhu7eqd3snqy" path="res://Sprites/unmuted.png" id="5_dnrd0"]
+[ext_resource type="Texture2D" uid="uid://sxh1q1f5bbnb" path="res://Sprites/muted.png" id="6_mceyx"]
+[ext_resource type="Texture2D" uid="uid://dsve5w8v0txd0" path="res://Sprites/hourglass.png" id="7_cx8gq"]
 
 [node name="UI" type="CanvasLayer"]
-script = ExtResource("1_ijc1p")
+script = ExtResource("1_vkwvh")
 
 [node name="Menus" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -23,7 +23,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("2_3fywx")
+theme_override_styles/panel = ExtResource("2_llyn7")
 
 [node name="MarginContainer" type="MarginContainer" parent="Menus/Game Over"]
 layout_mode = 2
@@ -62,7 +62,7 @@ text = "Quit"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("2_3fywx")
+theme_override_styles/panel = ExtResource("2_llyn7")
 
 [node name="MarginContainer" type="MarginContainer" parent="Menus/Level Complete"]
 layout_mode = 2
@@ -103,7 +103,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("2_3fywx")
+theme_override_styles/panel = ExtResource("2_llyn7")
 
 [node name="MarginContainer" type="MarginContainer" parent="Menus/Paused"]
 layout_mode = 2
@@ -141,6 +141,55 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Quit"
 
+[node name="Victory" type="PanelContainer" parent="Menus"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_llyn7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/Victory"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Victory/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="Menus/Victory/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="Menus/Victory/MarginContainer/VBoxContainer/CenterContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Victory!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CenterContainer2" type="CenterContainer" parent="Menus/Victory/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Thanks" type="RichTextLabel" parent="Menus/Victory/MarginContainer/VBoxContainer/CenterContainer2"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Thanks for playing!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Quit" type="Button" parent="Menus/Victory/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
 [node name="Buttons" type="MarginContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -154,23 +203,23 @@ layout_mode = 2
 
 [node name="Undo" type="TextureButton" parent="Buttons/HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("2_tevap")
+texture_normal = ExtResource("3_rk0wu")
 
 [node name="Mute" type="Control" parent="Buttons/HBoxContainer"]
 layout_mode = 2
-script = ExtResource("3_p4ixv")
+script = ExtResource("4_ielr0")
 
 [node name="Unmuted" type="TextureButton" parent="Buttons/HBoxContainer/Mute"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture_normal = ExtResource("3_y2542")
+texture_normal = ExtResource("5_dnrd0")
 
 [node name="Muted" type="TextureButton" parent="Buttons/HBoxContainer/Mute"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture_normal = ExtResource("3_qa0ts")
+texture_normal = ExtResource("6_mceyx")
 
 [node name="Force Field Status" type="MarginContainer" parent="."]
 anchors_preset = 1
@@ -209,7 +258,7 @@ autowrap_mode = 0
 
 [node name="Hourglass" type="TextureRect" parent="Force Field Status/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_bw27v")
+texture = ExtResource("7_cx8gq")
 expand_mode = 2
 
 [connection signal="pressed" from="Menus/Game Over/MarginContainer/VBoxContainer/Try Again" to="." method="OnTryAgain"]
@@ -218,6 +267,7 @@ expand_mode = 2
 [connection signal="pressed" from="Menus/Level Complete/MarginContainer/VBoxContainer/Quit" to="." method="OnQuit"]
 [connection signal="pressed" from="Menus/Paused/MarginContainer/VBoxContainer/Restart" to="." method="OnTryAgain"]
 [connection signal="pressed" from="Menus/Paused/MarginContainer/VBoxContainer/Quit" to="." method="OnQuit"]
+[connection signal="pressed" from="Menus/Victory/MarginContainer/VBoxContainer/Quit" to="." method="OnQuit"]
 [connection signal="pressed" from="Buttons/HBoxContainer/Undo" to="." method="OnUndo"]
 [connection signal="MuteToggle" from="Buttons/HBoxContainer/Mute" to="." method="UpdateMute"]
 [connection signal="pressed" from="Buttons/HBoxContainer/Mute/Unmuted" to="Buttons/HBoxContainer/Mute" method="OnStateChanged" binds= [true]]

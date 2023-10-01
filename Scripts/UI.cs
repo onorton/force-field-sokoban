@@ -6,6 +6,7 @@ public partial class UI : CanvasLayer
 	private Control _gameOver;
 	private Control _levelComplete;
 	private Control _paused;
+	private Control _victory;
 
 	[Signal]
 	public delegate void UndoEventHandler();
@@ -21,10 +22,12 @@ public partial class UI : CanvasLayer
 		_gameOver = GetNode<Control>("Menus/Game Over");
 		_levelComplete = GetNode<Control>("Menus/Level Complete");
 		_paused = GetNode<Control>("Menus/Paused");
+		_victory = GetNode<Control>("Menus/Victory");
 
 		_gameOver.Visible = false;
 		_levelComplete.Visible = false;
 		_paused.Visible = false;
+		_victory.Visible = false;
 
 		_playerVariables = GetNode<PlayerVariables>("/root/PlayerVariables");
 
@@ -51,7 +54,7 @@ public partial class UI : CanvasLayer
 	public void OnContinue()
 	{
 		_playerVariables.NextLevel();
-		GetTree().ReloadCurrentScene();
+		GetTree().ChangeSceneToFile($"res://Scenes/level-{_playerVariables.Level}.tscn");
 	}
 
 	public void OnQuit()
@@ -66,7 +69,14 @@ public partial class UI : CanvasLayer
 
 	public void OnLevelComplete()
 	{
-		_levelComplete.Visible = true;
+		if (_playerVariables.AtLastLevel())
+		{
+			_victory.Visible = true;
+		}
+		else
+		{
+			_levelComplete.Visible = true;
+		}
 	}
 
 	public void OnUndo()

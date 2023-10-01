@@ -315,8 +315,6 @@ public partial class TurnManager : Node
 
 	// TODO: UI
 
-	// TODO: Multiple Levels/ Loading levels from config
-
 
 	// TODO, Polish: Priority order of sounds if multiple played per turn
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://ct3x4kbss6mf4"]
 
 [ext_resource type="Script" path="res://Scripts/TurnManager.cs" id="1_t4kue"]
 [ext_resource type="TileSet" uid="uid://c03p7wu6xn04h" path="res://tileset.tres" id="2_3f3mu"]
